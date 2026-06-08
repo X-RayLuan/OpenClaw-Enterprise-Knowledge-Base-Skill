@@ -35,8 +35,9 @@ hot.md = fresh-session startup cache
 1. Decide whether the user is creating a new vault, auditing an existing vault, adding objects, or preparing OpenClaw sync.
 2. For folder layout, read `references/vault-structure.md`.
 3. For object fields and relationship style, read `references/ontology-schema.md`.
-4. For the root hot cache pattern, read `references/hot-cache.md`.
-5. For OpenClaw runtime handoff, read `references/agent-sync.md`.
+4. For object types, relationship predicates, action families, and governance vocabulary, read `references/ontology-vocabulary.md`.
+5. For the root hot cache pattern, read `references/hot-cache.md`.
+6. For OpenClaw runtime handoff, read `references/agent-sync.md`.
 
 Ask only when the missing choice changes the artifact materially. Otherwise choose conservative enterprise defaults.
 
@@ -94,6 +95,8 @@ Actions are ontology verbs. Create action pages for agent behaviors such as quot
 
 Any action involving price, delivery date, warranty, contract terms, customer data export, public publishing, compliance claims, or deleting knowledge requires human approval.
 
+Use the action families and approval gates in `references/ontology-vocabulary.md` when designing a reusable enterprise vault.
+
 ## OpenClaw Startup Order
 
 OpenClaw-facing vaults should include:
@@ -118,8 +121,8 @@ Before finalizing a vault, confirm:
 
 - Required frontmatter fields exist.
 - `object_id` values are unique.
+- Action pages include `action_id`.
 - Public pages are verified.
 - Action pages say what the agent may and may not do.
 - `hot.md` is short and contains no sensitive data.
 - OpenClaw startup order is explicit.
-

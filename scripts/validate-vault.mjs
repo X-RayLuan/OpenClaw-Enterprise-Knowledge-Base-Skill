@@ -78,6 +78,7 @@ export async function validateVault(options = {}) {
   const missingRequired = [];
   const invalidStatus = [];
   const invalidVisibility = [];
+  const missingActionId = [];
   const unverifiedPublic = [];
   const duplicateIds = [];
   const ids = new Map();
@@ -118,6 +119,10 @@ export async function validateVault(options = {}) {
       unverifiedPublic.push(rel);
     }
 
+    if (parsed.data.type === 'action' && !parsed.data.action_id) {
+      missingActionId.push(rel);
+    }
+
     if (rel === 'hot.md') {
       hotCache = {
         path: rel,
@@ -141,6 +146,7 @@ export async function validateVault(options = {}) {
     missingRequired,
     invalidStatus,
     invalidVisibility,
+    missingActionId,
     duplicateIds,
     unverifiedPublic,
     hotCacheIssues
@@ -175,4 +181,3 @@ if (isMain) {
   process.stdout.write(JSON.stringify(result, null, 2) + '\n');
   if (result.status !== 'PASS') process.exitCode = 1;
 }
-

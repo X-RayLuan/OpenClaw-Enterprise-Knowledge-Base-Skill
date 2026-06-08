@@ -42,6 +42,7 @@ test('validateVault passes an OpenClaw-ready enterprise vault', async () => {
     '---',
     'type: action',
     'object_id: action-create-quote-draft',
+    'action_id: create-quote-draft',
     'status: verified',
     'visibility: internal',
     'owner: sales',
@@ -86,3 +87,38 @@ test('validateVault flags unverified public pages and duplicate IDs', async () =
   assert.deepEqual(result.issues.hotCacheIssues, ['missing hot.md']);
 });
 
+test('validateVault flags action pages without action_id', async () => {
+  const vault = await mkdtemp(join(tmpdir(), 'enterprise-kb-action-'));
+  await writeFile(join(vault, 'hot.md'), [
+    '---',
+    'type: hot_cache',
+    'object_id: hot-cache',
+    'status: verified',
+    'visibility: internal',
+    'owner: knowledge',
+    'source:',
+    '  - internal',
+    'last_reviewed: 2026-06-08',
+    '---',
+    '',
+    '2026-06-08 | Enterprise KB | Current focus is validation.'
+  ].join('\n'));
+  await writeFile(join(vault, 'Action.md'), [
+    '---',
+    'type: action',
+    'object_id: action-missing-id',
+    'status: verified',
+    'visibility: internal',
+    'owner: knowledge',
+    'source:',
+    '  - internal',
+    'last_reviewed: 2026-06-08',
+    '---',
+    '',
+    '# Action'
+  ].join('\n'));
+
+  const result = await validateVault({ vault });
+  assert.equal(result.status, 'FAIL');
+  assert.deepEqual(result.issues.missingActionId, ['Action.md']);
+});

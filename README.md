@@ -23,6 +23,7 @@ The goal is simple: make company knowledge usable by agents without turning it i
 │   ├── agent-sync.md
 │   ├── hot-cache.md
 │   ├── ontology-schema.md
+│   ├── ontology-vocabulary.md
 │   └── vault-structure.md
 ├── scripts/
 │   └── validate-vault.mjs
@@ -82,10 +83,21 @@ The validator checks:
 - Markdown files with YAML frontmatter.
 - Missing required object fields.
 - Duplicate `object_id` values.
+- Missing `action_id` values on action pages.
 - Public pages that are not verified.
 - `hot.md` body length.
+
+## Ontology Coverage
+
+The skill includes a reusable enterprise ontology vocabulary:
+
+- Object types such as `company`, `product`, `certification`, `sales_scenario`, `quote_template`, `service_rule`, `action`, and `evidence`.
+- Relationship predicates such as `has_certification`, `suitable_for`, `quoted_by`, `derived_from`, `requires_approval_from`, and `supersedes`.
+- Action families for sales, support, knowledge maintenance, and escalation.
+- Governance rules for status, visibility, approval gates, and wrong-answer correction.
+
+See `references/ontology-vocabulary.md` when designing or auditing a real vault.
 
 ## Publishing Notes
 
 This repo is designed to be published as a skill package. Keep company-specific facts, customer data, prices, quotes, internal disputes, and private source files out of this repository. Put only reusable operating rules here.
-

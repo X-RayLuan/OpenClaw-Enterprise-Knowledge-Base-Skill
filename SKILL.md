@@ -1,7 +1,7 @@
 ---
 name: openclaw-enterprise-knowledge-base
 description: Use when creating, auditing, repairing, validating, or syncing an enterprise Markdown or Obsidian knowledge base for OpenClaw agents. Applies to ontology-style wiki pages, governed business objects, hot.md startup cache, agent-safe visibility rules, OpenClaw manifests, RAG handoff, sales/support action governance, and knowledge-base QA workflows.
-version: "0.1.0"
+version: "0.2.0"
 tags:
   - openclaw
   - enterprise
@@ -27,6 +27,8 @@ Wiki links / inline fields = relationships
 Action pages = approved business verbs
 status + visibility = governance and permissions
 openclaw/manifest.json = runtime contract
+openclaw/Corpus-Descriptions.md = retrieval routing map
+openclaw/Agentic-RAG-Workflow.md = sufficient-context workflow
 hot.md = fresh-session startup cache
 ```
 
@@ -38,6 +40,7 @@ hot.md = fresh-session startup cache
 4. For object types, relationship predicates, action families, and governance vocabulary, read `references/ontology-vocabulary.md`.
 5. For the root hot cache pattern, read `references/hot-cache.md`.
 6. For OpenClaw runtime handoff, read `references/agent-sync.md`.
+7. For agentic RAG, cross-corpus routing, and sufficient-context checks, read `references/agentic-rag.md`.
 
 Ask only when the missing choice changes the artifact materially. Otherwise choose conservative enterprise defaults.
 
@@ -103,11 +106,26 @@ OpenClaw-facing vaults should include:
 
 ```text
 openclaw/manifest.json
+openclaw/Corpus-Descriptions.md
+openclaw/Agentic-RAG-Workflow.md
 hot.md
 Home.md
 ```
 
-The manifest should expose safe paths, approved action names, startup order, and governance rules. It must not bypass `status` or `visibility`.
+The manifest should expose safe paths, approved action names, startup order, retrieval routing files, and governance rules. It must not bypass `status` or `visibility`.
+
+## Agentic RAG And Sufficient Context
+
+For vaults that support recommendations, quotes, support, compliance, or multi-source answers, add the cross-corpus pattern in `references/agentic-rag.md`.
+
+Minimum behavior:
+
+1. Classify the request workflow.
+2. Route to the smallest sufficient set of corpora.
+3. Retrieve frontmatter, direct evidence, and `## Relationships`.
+4. Check whether context is sufficient and export-safe.
+5. If insufficient, retrieve again or ask the shortest missing follow-up questions.
+6. Separate confirmed facts, drafts, missing fields, approval gates, and next actions.
 
 ## Validation
 

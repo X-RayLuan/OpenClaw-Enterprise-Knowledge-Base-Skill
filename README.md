@@ -11,6 +11,7 @@ The goal is simple: make company knowledge usable by agents without turning it i
 - OpenClaw startup rules, including a root `hot.md` hot cache.
 - Governance rules for customer-facing answers and high-risk actions.
 - A lightweight validator for frontmatter, duplicate IDs, and hot cache length.
+- Agentic RAG guidance for cross-corpus routing and sufficient-context checks.
 
 ## Repository Layout
 
@@ -21,6 +22,7 @@ The goal is simple: make company knowledge usable by agents without turning it i
 │   └── openai.yaml
 ├── references/
 │   ├── agent-sync.md
+│   ├── agentic-rag.md
 │   ├── hot-cache.md
 │   ├── ontology-schema.md
 │   ├── ontology-vocabulary.md
@@ -44,7 +46,9 @@ Enterprise-Vault/
 ├── evidence/
 ├── openclaw/
 │   ├── README.md
-│   └── manifest.json
+│   ├── manifest.json
+│   ├── Corpus-Descriptions.md
+│   └── Agentic-RAG-Workflow.md
 ├── products/
 ├── sales/
 └── service/
@@ -67,10 +71,19 @@ last_reviewed:
 OpenClaw should read in this order:
 
 ```text
-openclaw/manifest.json -> hot.md -> Home.md
+openclaw/manifest.json -> openclaw/Corpus-Descriptions.md -> openclaw/Agentic-RAG-Workflow.md -> hot.md -> Home.md
 ```
 
 `hot.md` is a short startup cache, not a source of truth. Keep it under 500 Chinese characters or roughly 900 English characters.
+
+## Agentic RAG
+
+For multi-source enterprise answers, add a routing map and sufficient-context workflow:
+
+- `openclaw/Corpus-Descriptions.md` tells the agent which corpus to search for each workflow.
+- `openclaw/Agentic-RAG-Workflow.md` tells the agent to verify context sufficiency before answering.
+
+See `references/agentic-rag.md` for templates, workflow-to-corpus routing, and tool contract extensions such as `route_corpus` and `sufficient_context_check`.
 
 ## Validate A Vault
 

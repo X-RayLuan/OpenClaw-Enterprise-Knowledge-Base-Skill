@@ -14,7 +14,9 @@ Enterprise-Vault/
 ├── evidence/
 ├── openclaw/
 │   ├── README.md
-│   └── manifest.json
+│   ├── manifest.json
+│   ├── Corpus-Descriptions.md
+│   └── Agentic-RAG-Workflow.md
 ├── products/
 ├── sales/
 ├── service/
@@ -22,6 +24,8 @@ Enterprise-Vault/
 ```
 
 Use folders by business object type. Keep raw intake files under `source-materials/` and distilled, cited evidence notes under `evidence/`.
+
+`openclaw/Corpus-Descriptions.md` should describe each searchable corpus and when to route there. `openclaw/Agentic-RAG-Workflow.md` should define the sufficient-context check before an agent answers.
 
 `Home.md` is the durable navigation hub. `hot.md` is the short fresh-session cache. Dashboards are operational views, not source-of-truth pages.
 

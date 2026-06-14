@@ -38,6 +38,8 @@ Use these as `type` values unless a project has a documented extension.
 
 - `action`: Approved agent behavior or workflow verb.
 - `tool_contract`: Tool input/output contract, side effects, and approval boundary.
+- `retrieval_config`: Corpus routing map, retrieval policy, or cross-corpus search description.
+- `workflow`: Reusable multi-step agent procedure such as sufficient-context checking.
 - `evidence`: Source note distilled from files, pages, messages, calls, PDFs, screenshots, or datasets.
 - `dashboard`: Review queue, action index, coverage map, or QA dashboard.
 - `qa_test`: Question, expected behavior, actual answer, verdict, and fix path.
@@ -110,6 +112,8 @@ Use lowercase snake_case. Prefer this vocabulary before inventing new predicates
 - `updates:: [[Object-Type-Or-Page]]`
 - `tested_by:: [[QA-Test]]`
 - `fixed_by:: [[Correction-Rule]]`
+- `routes_to:: [[Corpus-Or-Folder]]`
+- `requires_context_check:: [[Workflow-Or-Policy]]`
 
 ## Action Families
 
@@ -138,6 +142,8 @@ Action pages should be verbs. Use stable action IDs.
 - `log-wrong-answer`: Capture bad answer, expected answer, root cause, and fix path.
 - `create-correction-rule`: Turn a wrong answer into a reusable rule.
 - `refresh-hot-cache`: Update `hot.md` with current focus, related pages, and next step.
+- `route-corpus`: Select the smallest sufficient set of corpora for a request.
+- `sufficient-context-check`: Decide whether retrieved evidence is complete, traceable, and export-safe before answering.
 
 ## Approval Gates
 
